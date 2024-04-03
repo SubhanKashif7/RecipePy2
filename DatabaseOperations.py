@@ -37,9 +37,9 @@ class DatabaseOperations:
         self._connection.commit()
 
     def login_user(self, username, password):
-        self.c.execute("SELECT * FROM users WHERE username = ?", (username,))
+        self.c.execute("SELECT * FROM users WHERE username = ? AND password = ?", (username, password))
         user = self.c.fetchone()
-        if user and user[2] == password:
+        if user:
             return user
         else:
             return None
